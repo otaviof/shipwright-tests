@@ -30,3 +30,6 @@ behave:
 .PHONY: clean
 clean:
 	rm -rf "$(ENV_DIR)" "./*.egg-info" || true
+
+shipwright-tests:
+	act --secret="GITHUB_TOKEN=${GITHUB_TOKEN}" --job="shipwright-tests"

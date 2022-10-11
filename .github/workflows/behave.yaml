@@ -16,18 +16,25 @@ jobs:
     name: Shipwright System Testing
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
       - uses: helm/kind-action@v1.2.0
         with:
           version: v0.14.0
           cluster_name: kind
           wait: 120s
-      - uses: otaviof/setup-shipwright@v0
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.18'
+      - uses: imjasonh/setup-ko@v0.6
+      - uses: shipwright-io/setup@main
+        with:
+          version: tip
 
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
+
+      - uses: actions/checkout@v3
 
       - name: Install Test Dependencies
         run: |
